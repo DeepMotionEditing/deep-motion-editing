@@ -145,8 +145,8 @@ Eevee (left) is a fast, real-time, render engine provides limited quality, while
 
 
 <p float="left">
-  <img src="blender_rendering/images/eevee.png" width="230" />
-  <img src="blender_rendering/images/cycles.png" width="230" />
+  <img src="blender_rendering/images/eevee.png" width="300" />
+  <img src="blender_rendering/images/cycles.png" width="300" />
 </p>
 
 
