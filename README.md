@@ -41,8 +41,7 @@ python test.py -model_path retargeting/models/pretrained_retargeting.pth -input_
 The system support both in style from 3D MoCap data:
 
 ```bash
-python test.py -model_path retargeting/models/pretrained_style_transfer.pth
--input_A style_transfer/examples/content_input -input_B style_transfer/examples/3D_style_input -edit_type style_transfer
+python test.py -model_path retargeting/models/pretrained_style_transfer.pth -input_A style_transfer/examples/content_input -input_B style_transfer/examples/3D_style_input -edit_type style_transfer
 ```
 
 (demo result GIF: input_content, input_style, output)
@@ -61,7 +60,7 @@ We provide instructions for retraining our models
 
 #### Dataset
 
-Links, processing, comments.
+Links (mixamo intra/cross), processing, comments.
 
 #### Train
 
@@ -73,12 +72,12 @@ python retargeting/train.py
 
 #### Dataset
 
-Links, processing, comments.
+Links (Xia and BFA), processing, comments.
 
 #### Train
 
 ```bash
-python retargeting/train.py
+python style_transfer/train.py
 ```
 
 #### Style from videos
@@ -100,7 +99,6 @@ To use external python libraries, you need to change the default blender python 
 
 This interpreter should be python 3.7.x version and contains at least: numpy, scipy.
 
-Run `blender -P render.py` to get a ready to render blender GUI.
 
 ### Usage
 
@@ -112,17 +110,17 @@ Due to blender's argparse system, the argument list should be separated from the
 
 engine: "cycles" or "eevee". Please refer to `Render` section for more details.
 
-render: 0 or 1. If set to 1, the scrip will start render before entering blender GUI. It is recommended to use render = 0 and render after starting blender GUI because you might need to adjust the camera. It's also recommended to use render = 1 with `blender -b -P render.py` to run blender in background without GUI.
+render: 0 or 1. If set to 1, the data will be rendered outside blender's GUI. It is recommended to use render = 0 in case you need to manually adjust the camera.
 
 The full parameters list can be displayed by:
 `blender -P render.py -- -h`
 
 #### Load bvh File (`load_bvh.py`)
 
-You can use this file alone. To load `example.bvh` , run `blender -P load_bvh.py`. Please finish the preperation first.
+To load `example.bvh`, run `blender -P load_bvh.py`. Please finish the preparation first.
 
 
-> Currently it uses primitive_cone with 5 vertices for limbs.
+> Note that currently it uses primitive_cone with 5 vertices for limbs.
 
 > Note that Blender and bvh file have different xyz-coordinate systems. In bvh file, the "height" axis is y-axis while in blender it's z-axis. `load_bvh.py`  swaps the axis in the `BVH_file` class initialization funtion.
 
@@ -132,32 +130,23 @@ You can use this file alone. To load `example.bvh` , run `blender -P load_bvh.py
 
 
 
-
-
 #### Material, Texture, Light and Camera (`scene.py`)
 
-This file add a checkerboard floor, camera, a "sun" to the scene and apply a pure color material to character. The color and light is not very good now.
+This file enables to add a checkerboard floor, camera, a "sun" to the scene and to apply a basic color material to character.
 
-The floor doesn't work well now. It requires the animation in bvh file takes plan y=0 as floor, which is not true for all bvh files. But it works well with Mixamo's bvh.
-
+The floor is placed at y=0, and should be corrected manually in case that it is needed (depends on the character parametes in the bvh file).
 
 
 ## Rendering
 
-Blender 2.80 provides 3 render engines: Eevee, Workbench, Cycles.
+We support 2 render engines provided in Blender 2.80: Eevee and Cycles, where the trade-off is between speed and quality.
 
-Eevee is a real-time render engine: fast, but it can't get very high quality result.
-
-Workbench is not often used.
-
-Cycles is an unbiased ray-tracing render engine: slow but provides photo-level rendering result. Cycles also supports CUDA and OpenGL acceleration.
-
-Here is a comparison between the two engines. Cycles (right) provides more details (e.g., shadows).
+Eevee (left) is a fast, real-time, render engine provides limited quality, while Cycles (right) is a slower, unbiased, ray-tracing render engine provides photo-level rendering result. Cycles also supports CUDA and OpenGL acceleration.
 
 
 <p float="left">
-  <img src="blender_rendering/images/eevee.png" width="230" />
-  <img src="blender_rendering/images/cycles.png" width="230" />
+  <img src="blender_rendering/images/eevee.png" width="300" />
+  <img src="blender_rendering/images/cycles.png" width="300" />
 </p>
 
 
