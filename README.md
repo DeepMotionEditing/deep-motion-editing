@@ -60,13 +60,22 @@ We provide instructions for retraining our models
 
 #### Dataset
 
-Links (mixamo intra/cross), processing, comments.
+Here are the links to test data set: [Google Drive](https://docs.google.com/uc?export=download&id=1_849LvuT3WBEHktBT97P2oMBzeJz7-UP), [Baidu Disk](https://pan.baidu.com/s/1z1cQiqLUgjfxlWoajIPr0g) (ye1q). 
 
 #### Train
 
+Coming soon...
+
+#### Test and Evaluation
+
+Extract the test set from the download file and put the `Mixamo` directory in `retargeting/datasets`. Then run the following commands.
+
 ```bash
-python retargeting/train.py
+cd retargeting
+python test.py
 ```
+
+The retarget result is in `retargeting/pretrained/results` now and you can get the quantitative result.
 
 ### Motion Style Transfer
 
