@@ -13,7 +13,7 @@ We provide pretrained models and a few examples that enable one to retarget moti
 python test.py -model_path MODEL_PATH -input_A PATH_A -input_B PATH_B -edit_type TYPE
 ```
 
-### Motion Retargeting
+### Motion Retargeting (Not yet supported)
 `TYPE = retargeting`  
 `PATH_A` - motion input  
 `PATH_B` - skeleton input
@@ -60,13 +60,22 @@ We provide instructions for retraining our models
 
 #### Dataset
 
-Links (mixamo intra/cross), processing, comments.
+Here are the links to test data set: [Google Drive](https://docs.google.com/uc?export=download&id=1_849LvuT3WBEHktBT97P2oMBzeJz7-UP), [Baidu Disk](https://pan.baidu.com/s/1z1cQiqLUgjfxlWoajIPr0g) (ye1q). 
 
 #### Train
 
+Coming soon...
+
+#### Test and Evaluation
+
+Extract the test set from the download file and put the `Mixamo` directory in `retargeting/datasets`. Then run the following commands.
+
 ```bash
-python retargeting/train.py
+cd retargeting
+python test.py
 ```
+
+The retarget result is in `retargeting/pretrained/results` now and you can get the quantitative result.
 
 ### Motion Style Transfer
 
