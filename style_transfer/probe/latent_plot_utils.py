@@ -1,4 +1,5 @@
 import os
+import sys
 import numpy as np
 import matplotlib.pyplot as plt
 import torch
@@ -8,6 +9,8 @@ from matplotlib import cm
 from matplotlib.legend_handler import HandlerLine2D, HandlerTuple
 import tikzplotlib
 from os.path import join as pjoin
+BASEPATH = os.path.dirname(__file__)
+sys.path.insert(0, pjoin(BASEPATH, '..'))
 from utils import ensure_dirs
 
 
