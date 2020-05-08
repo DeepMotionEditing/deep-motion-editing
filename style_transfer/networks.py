@@ -13,12 +13,12 @@ def assign_adain_params(adain_params, model):
     # assign the adain_params to the AdaIN layers in model
     for m in model.modules():
         if m.__class__.__name__ == "AdaptiveInstanceNorm1d":
-            mean = adain_params[:, :m.num_features]
-            std = adain_params[:, m.num_features:2*m.num_features]
+            mean = adain_params[: , : m.num_features]
+            std = adain_params[: , m.num_features: 2 * m.num_features]
             m.bias = mean.contiguous().view(-1)
             m.weight = std.contiguous().view(-1)
-            if adain_params.size(1) > 2*m.num_features:
-                adain_params = adain_params[:, 2*m.num_features:]
+            if adain_params.size(1) > 2 * m.num_features:
+                adain_params = adain_params[: , 2 * m.num_features:]
 
 
 def get_num_adain_params(model):
@@ -26,7 +26,7 @@ def get_num_adain_params(model):
     num_adain_params = 0
     for m in model.modules():
         if m.__class__.__name__ == "AdaptiveInstanceNorm1d":
-            num_adain_params += 2*m.num_features
+            num_adain_params += 2 * m.num_features
     return num_adain_params
 
 
