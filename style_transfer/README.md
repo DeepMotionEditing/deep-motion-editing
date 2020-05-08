@@ -41,12 +41,12 @@ We provide a pretrained model and several sample test inputs, from which the mai
 
 #### Prepare Data
 
-+ Download Xia's dataset and BFA dataset via [link](http://theorangeduck.com/page/deep-learning-framework-character-motion-synthesis-and-editing). The datasets contain .bvh files retargeted to the standard skeleton in [CMU mocap dataset](http://mocap.cs.cmu.edu/) . 
++ Download Xia's dataset and BFA dataset via [Google Drive](https://drive.google.com/drive/folders/1C-_iZJj-PSUWZwh25yAsQe1tLpPm9EZ5?usp=sharing) or [Baidu Drive](https://pan.baidu.com/s/1LtZaX7bQ6kz8TrDWd4FxWA)(zzck). The datasets contain .bvh files retargeted to the standard skeleton in [CMU mocap dataset](http://mocap.cs.cmu.edu/). 
++ Extract the .zip files into `style_transfer/data`
 
 + Pre-process data for training:
 
   ```bash
-  mv {mocap_xia.zip,mocap_bfa.zip} style_transfer/data
   cd style_transfer/data_proc
   bash gen_dataset.sh
   ```
