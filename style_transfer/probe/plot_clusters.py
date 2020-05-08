@@ -6,6 +6,7 @@ import importlib
 import numpy as np
 from os.path import join as pjoin
 BASEPATH = os.path.dirname(__file__)
+sys.path.insert(0, pjoin(BASEPATH))
 sys.path.insert(0, pjoin(BASEPATH, '..'))
 
 from data_loader import get_dataloader
@@ -75,7 +76,8 @@ def plot_all(cfg):
 
 
 def plot_demo(cfg):
-    output_path = pjoin("demo_results", "figures")
+    BASEPATH = pjoin(os.path.dirname(__file__), '..')
+    output_path = pjoin(BASEPATH, "demo_results", "figures")
     vis_dicts = get_all_codes(cfg, pjoin(output_path, 'output_codes.npz'))
     get_demo_plots(vis_dicts, output_path)
 

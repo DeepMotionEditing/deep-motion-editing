@@ -1,1 +1,1 @@
-python train.py
+python style_transfer/train.py

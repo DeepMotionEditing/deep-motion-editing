@@ -1,3 +1,7 @@
+import os
+import sys
+BASEPATH = os.path.dirname(__file__)
+sys.path.insert(0, BASEPATH)
 from os.path import join as pjoin
 import argparse
 import importlib

@@ -1,7 +1,10 @@
 import os
+import sys
 import torch
+from os.path import join as pjoin
 from utils import ensure_dirs
 import shutil
+BASEPATH = os.path.dirname(__file__)
 
 
 class Config:
@@ -19,11 +22,11 @@ class Config:
     use_newdecoder = True
 
     # data paths
-    data_dir = 'data'
-    expr_dir = '.'
+    data_dir = pjoin(BASEPATH, 'data')
+    expr_dir = BASEPATH
     data_filename = "xia.npz"
-    data_path = os.path.join(data_dir, data_filename)
-    extra_data_dir = os.path.join(data_dir, data_filename.split('.')[-2].split('/')[-1] + "_norms")
+    data_path = pjoin(data_dir, data_filename)
+    extra_data_dir = pjoin(data_dir, data_filename.split('.')[-2].split('/')[-1] + "_norms")
 
     # model paths
     main_dir = None
@@ -188,6 +191,5 @@ class Config:
         if save:
             self.config_name = args.config
             cfg_file = "%s.py" % self.config_name
-            cfg_file = cfg_file.replace("/", "-")
-            shutil.copy(cfg_file, os.path.join(self.info_dir, cfg_file))
+            shutil.copy(pjoin(BASEPATH, cfg_file), os.path.join(self.info_dir, cfg_file))
 

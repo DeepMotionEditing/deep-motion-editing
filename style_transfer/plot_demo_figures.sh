@@ -1,1 +1,1 @@
-python probe/plot_clusters.py
+python style_transfer/probe/plot_clusters.py
