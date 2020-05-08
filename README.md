@@ -13,7 +13,7 @@ We provide pretrained models and a few examples that enable one to retarget moti
 python test.py -model_path MODEL_PATH -input_A PATH_A -input_B PATH_B -edit_type TYPE
 ```
 
-### Motion Retargeting
+### Motion Retargeting (Not yet supported)
 `TYPE = retargeting`  
 `PATH_A` - motion input  
 `PATH_B` - skeleton input
