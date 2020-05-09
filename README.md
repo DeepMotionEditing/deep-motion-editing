@@ -75,7 +75,7 @@ cd retargeting
 python test.py
 ```
 
-The retarget result is in `retargeting/pretrained/results` now and you can get the quantitative result.
+The retarget result is in `retargeting/pretrained/results` now and you can get the quantitative result. For intra structure retargeting, we test between all paires betweent the four test characters in `group A`. For cross structure, we test from `BigVegas` to all four test characters in `group A`.
 
 ### Motion Style Transfer
 

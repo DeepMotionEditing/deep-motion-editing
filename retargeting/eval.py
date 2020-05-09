@@ -28,7 +28,7 @@ def main():
     model.load(epoch=20000)
 
     for i, motions in enumerate(dataset):
-        print('Running on test {}'.format(i))
+        print('[{}/4] Running on test {}'.format(args.eval_seq, i))
 
         model.set_input(motions)
         model.test()
