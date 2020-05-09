@@ -2,8 +2,6 @@ import os
 import torch
 import torch.optim
 from abc import ABC, abstractmethod
-from loss_record import LossRecorder
-from torch.utils.tensorboard import SummaryWriter
 
 
 class BaseModel(ABC):
@@ -22,6 +20,8 @@ class BaseModel(ABC):
         self.model_save_dir = os.path.join(args.save_dir, 'models')  # save all the checkpoints to save_dir
 
         if self.is_train:
+            from loss_record import LossRecorder
+            from torch.utils.tensorboard import SummaryWriter
             self.log_path = os.path.join(args.save_dir, 'logs')
             self.writer = SummaryWriter(self.log_path)
             self.loss_recoder = LossRecorder(self.writer)

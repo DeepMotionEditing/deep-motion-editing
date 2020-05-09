@@ -1,6 +1,5 @@
 from models.integrated import IntegratedModel
 from torch import optim
-from torch import nn
 import torch
 from models.utils import GAN_loss, ImagePool, get_ee, Criterion_EE, Eval_Criterion, Criterion_EE_2
 from models.base_model import BaseModel
