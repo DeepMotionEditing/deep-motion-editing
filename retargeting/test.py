@@ -26,8 +26,9 @@ if __name__ == '__main__':
     cross_error = []
     intra_error = []
     for i in range(4):
-        print('Batch {}'.format(i))
         os.system('python eval.py --eval_seq={}'.format(i))
+
+        print('Collecting test error...')
         if i == 0:
             cross_error += full_batch(0)
             for char in test_characters:
@@ -50,3 +51,4 @@ if __name__ == '__main__':
 
     print('Intra-retargeting error:', intra_error_mean)
     print('Cross-retargeting error:', cross_error_mean)
+    print('Evaluation finished!')

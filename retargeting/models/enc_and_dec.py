@@ -95,7 +95,7 @@ class Decoder(nn.Module):
 
             self.unpools.append(SkeletonUnpool(enc.pooling_list[args.num_layers - i - 1], in_channels // len(neighbor_list)))
 
-            seq.append(nn.Upsample(scale_factor=2, mode=args.upsampling))
+            seq.append(nn.Upsample(scale_factor=2, mode=args.upsampling, align_corners=False))
             seq.append(self.unpools[-1])
             for _ in range(args.extra_conv):
                 seq.append(SkeletonConv(neighbor_list, in_channels=in_channels, out_channels=in_channels,
