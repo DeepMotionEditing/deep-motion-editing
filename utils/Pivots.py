@@ -54,8 +54,8 @@ class Pivots:
     
     def directions(self, plane='xz'):
         dirs = np.zeros((len(self.ps), 3))
-        dirs["xyz".index(plane[0])] = np.sin(self.ps)
-        dirs["xyz".index(plane[1])] = np.cos(self.ps)
+        dirs[..., "xyz".index(plane[0])] = np.sin(self.ps)
+        dirs[..., "xyz".index(plane[1])] = np.cos(self.ps)
         return dirs
     
     def normalized(self):
