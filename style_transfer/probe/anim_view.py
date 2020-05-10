@@ -8,9 +8,13 @@ from matplotlib import cm
 import torch
 import argparse
 import sys
-sys.path.insert(0, os.path.dirname(__file__))
-sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..'))
-from utils import to_float
+from os.path import join as pjoin
+BASEPATH = os.path.dirname(os.path.abspath(__file__))
+sys.path.insert(0, BASEPATH)
+sys.path.insert(0, pjoin(BASEPATH, '..'))
+sys.path.insert(0, pjoin(BASEPATH, '..', '..'))
+
+from py_utils import to_float
 
 
 """

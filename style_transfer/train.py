@@ -10,7 +10,7 @@ from tensorboardX import SummaryWriter
 from data_loader import get_dataloader
 from itertools import cycle
 
-from utils import write_loss, print_composite, to_float
+from py_utils import write_loss, print_composite, to_float
 from probe.latent_plot_utils import get_all_plots
 from trainer import Trainer
 

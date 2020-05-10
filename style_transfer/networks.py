@@ -4,7 +4,7 @@ import torch.nn.functional as F
 from torch import autograd
 import numpy as np
 from kinematics import ForwardKinematics
-from blocks import ConvBlock, ResBlock, LinearBlock, ShallowResBlock, \
+from blocks import ConvBlock, ResBlock, LinearBlock, \
     BottleNeckResBlock, Upsample, ConvLayers, ActiFirstResBlock, \
     get_conv_pad, get_norm_layer
 
