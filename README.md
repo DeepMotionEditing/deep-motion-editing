@@ -1,26 +1,35 @@
-# Deep-motion-editing
-This library provides fundamental and advanced functions to work with 3D character animation in deep learning using Pytorch. The code contains end-to-end modules, from reading and editing animation files to visualizing and rendering (using Blender) them.
+# Deep-motion-editing (under construction)
+This library provides fundamental and advanced functions to work with 3D character animation in deep learning with Pytorch. The code contains end-to-end modules, from reading and editing animation files to visualizing and rendering (using Blender) them.
 
 The two main deep editing operations provided here, were proposed in [Skeleton-Aware Networks for Deep Motion Retargeting]() and [Unpaired Motion Style Transfer from Video to Animation](), which are published in SIGGRAPH 2020.
 
-This library was written and is maintained by [Kfir Aberman](kfiraberman.github.io), [Peizhuo Li]() and [Yijia Weng]().
+This library is written and maintained by [Kfir Aberman](kfiraberman.github.io), [Peizhuo Li](https://peizhuoli.github.io/) and [Yijia Weng](https://halfsummer11.github.io/).
+
+The library is still under development.
 
 
 ## Quick Start
-We provide pretrained models and a few examples that enable one to retarget motion or transfer its style via
+We provide pretrained models and a few examples that enable one to retarget motion or transfer the style of animation files specified in bvh format.
 
-```bash
+<!--```bash
 python test.py -model_path MODEL_PATH -input_A PATH_A -input_B PATH_B -edit_type TYPE
-```
+```-->
 
 ### Motion Retargeting
-`TYPE = retargeting`  
+<!-- `TYPE = retargeting`  
 `PATH_A` - motion input  
-`PATH_B` - skeleton input
+`PATH_B` - skeleton input -->
 
+Download and extract the test dataset from [Google Drive](https://docs.google.com/uc?export=download&id=1_849LvuT3WBEHktBT97P2oMBzeJz7-UP) or [Baidu Disk](https://pan.baidu.com/s/1z1cQiqLUgjfxlWoajIPr0g) (ye1q). Then place the `Mixamo` directory within `retargeting/datasets`, and run
 
+```bash
+cd retargeting
+python test.py
+```
 
-The system support both in Intra-Structural retargeting:
+The retargeted demo results, that consists both intra-structual retargeting and cross-structural retargeting, will be saved in `retargeting/pretrained/results`.
+
+<!-- The system support both in Intra-Structural retargeting:
 ```bash
 python test.py -model_path retargeting/models/pretrained_retargeting.pth -input_A retargeting/examples/IS_motion_input -input_B retargeting/examples/IS_skeleton_input -edit_type retargeting
 ```
@@ -31,10 +40,10 @@ and Cross-structural retargeting:
 python test.py -model_path retargeting/models/pretrained_retargeting.pth -input_A retargeting/examples/CS_motion_input -input_B retargeting/examples/CS_skeleton_input -edit_type retargeting
 ```
 
-(demo result GIF: input_motion, input_skeleton, output)
+(demo result GIF: input_motion, input_skeleton, output) -->
 
 ### Motion Style Transfer
-`TYPE = style_transfer`  
+<!-- `TYPE = style_transfer`  
 `PATH_A` - content motion input  
 `PATH_B` - style motion input  
 
@@ -51,31 +60,41 @@ and in style from 2D key-points (extracted from video):
 ```bash
 python test.py -model_path retargeting/models/pretrained_style_transfer.pth -input_A style_transfer/examples/content_input -input_B style_transfer/examples/2D_style_input -edit_type style_transfer
 ```
-(demo result GIF: input_content, input_style_video, output)
+(demo result GIF: input_content, input_style_video, output) -->
+To receive the demo examples, simply run
+```bash
+sh style_transfer/test.sh
+```
+The results will be saved in `style_transfer/demo_results`,
+where each folder contains the raw output `raw.bvh` and the output after footskate clean-up `fixed.bvh`.
 
 ## Train from scratch
 We provide instructions for retraining our models
 
 ### Motion Retargeting
 
-#### Dataset
-
-Links (mixamo intra/cross), processing, comments.
-
-#### Train
-
-```bash
-python retargeting/train.py
-```
+Coming soon...
 
 ### Motion Style Transfer
 
 #### Dataset
 
-Links (Xia and BFA), processing, comments.
++ Download the dataset from [Google Drive](https://drive.google.com/drive/folders/1C-_iZJj-PSUWZwh25yAsQe1tLpPm9EZ5?usp=sharing) or [Baidu Drive](https://pan.baidu.com/s/1LtZaX7bQ6kz8TrDWd4FxWA) (zzck). The dataset consists of two parts: one is the taken from the motion style transfer dataset proposed by [Xia et al.](http://faculty.cs.tamu.edu/jchai/projects/SIG15/style-final.pdf) and the other is our BFA dataset, where both parts contain .bvh files retargeted to the standard skeleton of [CMU mocap dataset](http://mocap.cs.cmu.edu/).
++ Extract the .zip files into `style_transfer/data`
+
+
++ Pre-process data for training:
+
+  ```bash
+  cd style_transfer/data_proc
+  sh gen_dataset.sh
+  ```
+
+  This will produce `xia.npz`, `bfa.npz` in `style_transfer/data`.
 
 #### Train
 
+After downloading the dataset simply run
 ```bash
 python style_transfer/train.py
 ```
@@ -149,7 +168,34 @@ Eevee (left) is a fast, real-time, render engine provides limited quality, while
   <img src="blender_rendering/images/cycles.png" width="300" />
 </p>
 
+## Acknowledgments
 
+The code in the utils directory is mostly taken from [Holden et al. [2016]](http://theorangeduck.com/page/deep-learning-framework-character-motion-synthesis-and-editing)
 
 ## Citation
-If you use this modules for your research, please cite:
+If you use this code for your research, please cite our paper:
+```
+@article{aberman2020skeleton,
+  author = {Aberman, Kfir and Li, Peizhuo and Sorkine-Hornung Olga and Lischinski, Dani and Cohen-Or, Daniel and Chen, Baoquan},
+  title = {Skeleton-Aware Networks for Deep Motion Retargeting},
+  journal = {ACM Transactions on Graphics (TOG)},
+  volume = {38},
+  number = {4},
+  pages = {62},
+  year = {2020},
+  publisher = {ACM}
+}
+```
+and
+```
+@article{aberman2020unpaired,
+  author = {Aberman, Kfir and Weng, Yijia and Lischinski, Dani and Cohen-Or, Daniel and Chen, Baoquan},
+  title = {Unpaired Motion Style Transfer from Video to Animation},
+  journal = {ACM Transactions on Graphics (TOG)},
+  volume = {38},
+  number = {4},
+  pages = {64},
+  year = {2020},
+  publisher = {ACM}
+}
+```
