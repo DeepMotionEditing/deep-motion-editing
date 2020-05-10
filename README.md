@@ -170,7 +170,7 @@ Eevee (left) is a fast, real-time, render engine provides limited quality, while
 
 ## Acknowledgments
 
-The code in the Utils directory is mostly taken from [Holden et al. [2016]](http://theorangeduck.com/page/deep-learning-framework-character-motion-synthesis-and-editing)
+The code in the utils directory is mostly taken from [Holden et al. [2016]](http://theorangeduck.com/page/deep-learning-framework-character-motion-synthesis-and-editing)
 
 ## Citation
 If you use this code for your research, please cite our paper:
@@ -188,7 +188,7 @@ If you use this code for your research, please cite our paper:
 ```
 and
 ```
-@article{aberman2020skeleton,
+@article{aberman2020unpaired,
   author = {Aberman, Kfir and Weng, Yijia and Lischinski, Dani and Cohen-Or, Daniel and Chen, Baoquan},
   title = {Unpaired Motion Style Transfer from Video to Animation},
   journal = {ACM Transactions on Graphics (TOG)},
