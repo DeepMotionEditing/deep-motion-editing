@@ -1,4 +1,4 @@
-# Deep-motion-editing
+# Deep-motion-editing (under construction)
 This library provides fundamental and advanced functions to work with 3D character animation in deep learning with Pytorch. The code contains end-to-end modules, from reading and editing animation files to visualizing and rendering (using Blender) them.
 
 The two main deep editing operations provided here, were proposed in [Skeleton-Aware Networks for Deep Motion Retargeting]() and [Unpaired Motion Style Transfer from Video to Animation](), which are published in SIGGRAPH 2020.
@@ -168,7 +168,34 @@ Eevee (left) is a fast, real-time, render engine provides limited quality, while
   <img src="blender_rendering/images/cycles.png" width="300" />
 </p>
 
+## Acknowledgments
 
+The code in the utils directory is mostly taken from [Holden et al. [2016]](http://theorangeduck.com/page/deep-learning-framework-character-motion-synthesis-and-editing)
 
 ## Citation
-If you use this modules for your research, please cite:
+If you use this code for your research, please cite our paper:
+```
+@article{aberman2020skeleton,
+  author = {Aberman, Kfir and Li, Peizhuo and Sorkine-Hornung Olga and Lischinski, Dani and Cohen-Or, Daniel and Chen, Baoquan},
+  title = {Skeleton-Aware Networks for Deep Motion Retargeting},
+  journal = {ACM Transactions on Graphics (TOG)},
+  volume = {38},
+  number = {4},
+  pages = {62},
+  year = {2020},
+  publisher = {ACM}
+}
+```
+and
+```
+@article{aberman2020unpaired,
+  author = {Aberman, Kfir and Weng, Yijia and Lischinski, Dani and Cohen-Or, Daniel and Chen, Baoquan},
+  title = {Unpaired Motion Style Transfer from Video to Animation},
+  journal = {ACM Transactions on Graphics (TOG)},
+  volume = {38},
+  number = {4},
+  pages = {64},
+  year = {2020},
+  publisher = {ACM}
+}
+```
