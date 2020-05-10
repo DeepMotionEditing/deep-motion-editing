@@ -4,7 +4,7 @@ import scipy.linalg as linalg
 import Animation
 import AnimationStructure
 
-from Quaternions2 import Quaternions
+from Quaternions_old import Quaternions
 
 class BasicInverseKinematics:
     """

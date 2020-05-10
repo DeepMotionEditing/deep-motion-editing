@@ -4,7 +4,7 @@ import sys
 sys.path.append("motion_utils")
 
 from Animation import Animation
-from Quaternions import Quaternions
+from Quaternions_old import Quaternions
 
 channelmap = {
     'Xrotation' : 'x',

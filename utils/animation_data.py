@@ -10,7 +10,7 @@ import argparse
 import numpy as np
 import scipy.ndimage.filters as filters
 from load_skeleton import Skel
-from Quaternions import Quaternions
+from Quaternions_old import Quaternions
 from Pivots import Pivots
 import BVH
 from probe.anim_view import visualize
