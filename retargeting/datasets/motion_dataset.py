@@ -1,13 +1,10 @@
 from torch.utils.data import Dataset
 import os
 import sys
-sys.path.append("./utils")
-sys.path.append("./")
-from pathlib import Path
+sys.path.append("../utils")
 import numpy as np
 import torch
 from Quaternions import Quaternions
-from datasets.bvh_parser import BVH_file
 from option_parser import get_std_bvh
 
 

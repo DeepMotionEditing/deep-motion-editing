@@ -15,7 +15,7 @@ def get_parser():
     parser.add_argument('--activation', type=str, default='LeakyReLU', help='activation: ReLU, LeakyReLU, tanh')
     parser.add_argument('--rotation', type=str, default='quaternion', help='representation of rotation:euler_angle, quaternion')
     parser.add_argument('--data_augment', type=int, default=1, help='data_augment: 1 or 0')
-    parser.add_argument('--epoch_num', type=int, default=16000, help='epoch_num')
+    parser.add_argument('--epoch_num', type=int, default=20001, help='epoch_num')
     parser.add_argument('--window_size', type=int, default=64, help='length of time axis per window')
     parser.add_argument('--kernel_size', type=int, default=15, help='must be odd')
     parser.add_argument('--base_channel_num', type=int, default=-1)

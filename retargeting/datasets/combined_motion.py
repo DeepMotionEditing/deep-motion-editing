@@ -1,15 +1,9 @@
 from torch.utils.data import Dataset
 import copy
 from datasets.motion_dataset import MotionData
-import random
 import os
-import sys
-sys.path.append("./utils")
-sys.path.append("./")
-from pathlib import Path
 import numpy as np
 import torch
-from Quaternions import Quaternions
 from datasets.bvh_parser import BVH_file
 from option_parser import get_std_bvh
 from datasets import get_test_set

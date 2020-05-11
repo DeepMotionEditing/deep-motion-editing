@@ -3,6 +3,7 @@ from get_error import full_batch
 import numpy as np
 from option_parser import try_mkdir
 
+
 def batch_copy(source_path, suffix, dest_path, dest_suffix=None):
     try_mkdir(dest_path)
     files = [f for f in os.listdir(source_path) if f.endswith('_{}.bvh'.format(suffix))]

@@ -1,9 +1,5 @@
 import sys
 sys.path.append('./retargeting/')
-import torch
-import numpy as np
-import torch.optim as optim
-import torch.nn as nn
 from torch.utils.data.dataloader import DataLoader
 from models import create_model
 from datasets import create_dataset, get_character_names
