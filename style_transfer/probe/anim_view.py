@@ -8,17 +8,19 @@ from matplotlib import cm
 import torch
 import argparse
 import sys
-sys.path.insert(0, os.path.dirname(__file__))
-sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..'))
-from utils import to_float
+from os.path import join as pjoin
+BASEPATH = os.path.dirname(os.path.abspath(__file__))
+sys.path.insert(0, BASEPATH)
+sys.path.insert(0, pjoin(BASEPATH, '..'))
+sys.path.insert(0, pjoin(BASEPATH, '..', '..'))
+
+from py_utils import to_float
 
 
 """
 Motion info: 
-    J, joint parents, foot_idx
-    glb_pos
+    joint parents, foot_idx
 """
-glb_pos = True
 J = 21
 parents = np.array([-1, 0, 1, 2, 3, 0, 5, 6, 7, 0, 9, 10, 11, 10, 13, 14, 15, 10, 17, 18, 19])
 joint_foot_indices = [3, 4, 7, 8]
@@ -312,8 +314,8 @@ def load_output(filename):
 
 
 def main(args):
-    from motion_utils.animation_data import AnimationData
-    from motion_utils.animation_2d_data import AnimationData2D
+    from utils.animation_data import AnimationData
+    from utils.animation_2d_data import AnimationData2D
     data = load_output(args.file)
     total = len(data["trans"])
     content, style, foot_contact, trans, recon = data["content"], data["style"], data["foot_contact"], data["trans"], data["recon"]

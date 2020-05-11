@@ -2,13 +2,14 @@ import yaml
 import numpy as np
 import os
 import sys
-sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..'))
-from motion_utils.Animation import Animation
-import motion_utils.BVH as BVH
+from os.path import join as pjoin
+BASEPATH = os.path.dirname(os.path.abspath(__file__))
+sys.path.insert(0, BASEPATH)
+import BVH as BVH
 
 
 class Skel:
-    def __init__(self, filename=os.path.join(os.path.dirname(__file__), "..", "global_info", "skeleton_CMU.yml")):
+    def __init__(self, filename=os.path.join(BASEPATH, "..", "style_transfer", "global_info", "skeleton_CMU.yml")):
         f = open(filename, "r")
         skel = yaml.load(f, Loader=yaml.Loader)
         self.bvh_name = os.path.join(os.path.dirname(filename), skel['BVH'])

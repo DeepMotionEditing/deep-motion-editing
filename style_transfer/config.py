@@ -2,9 +2,10 @@ import os
 import sys
 import torch
 from os.path import join as pjoin
-from utils import ensure_dirs
+from py_utils import ensure_dirs
 import shutil
 BASEPATH = os.path.dirname(__file__)
+sys.path.insert(0, BASEPATH)
 
 
 class Config:

@@ -8,7 +8,7 @@ sys.path.insert(0, pjoin(BASEPATH, '..'))
 import numpy as np
 import json
 from scipy.ndimage import gaussian_filter1d
-from probe.anim_view import visualize
+from style_transfer.probe.anim_view import visualize
 
 
 class AnimationData2D:

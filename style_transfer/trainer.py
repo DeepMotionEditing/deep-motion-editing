@@ -7,7 +7,7 @@ import torch.nn.init as init
 from torch.optim import lr_scheduler
 
 from model import Model
-from utils import update_dict
+from py_utils import update_dict
 
 
 def get_model_list(dirname, key):

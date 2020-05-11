@@ -1,16 +1,17 @@
 import os
 import sys
-from os.path import join as pjoin
 import numpy as np
 import torch
 import argparse
 from tqdm import tqdm
+BASEPATH = os.path.dirname(__file__)
+from os.path import join as pjoin
+sys.path.insert(0, BASEPATH)
+sys.path.insert(0, pjoin(BASEPATH, '..'))
 
-sys.path.append('motion_utils') # the "BVH" stuff
-import BVH as BVH
-from InverseKinematics import JacobianInverseKinematics
-
-from motion_utils.animation_data import AnimationData
+import utils.BVH as BVH
+from utils.InverseKinematics import JacobianInverseKinematics
+from utils.animation_data import AnimationData
 
 
 def softmax(x, **kw):

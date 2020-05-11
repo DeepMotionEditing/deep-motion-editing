@@ -6,11 +6,13 @@ import argparse
 import shutil
 from copy import deepcopy
 from os.path import join as pjoin
+BASEPATH = os.path.dirname(os.path.abspath(__file__))
+sys.path.insert(0, BASEPATH)
+sys.path.insert(0, pjoin(BASEPATH, '..'))
+sys.path.insert(0, pjoin(BASEPATH, '..', '..'))
 
-sys.path.insert(0, '..')
-
-from motion_utils.animation_data import AnimationData
-from load_skeleton import Skel
+from utils.animation_data import AnimationData
+from utils.load_skeleton import Skel
 
 
 def pad_to_window(slice, window):

@@ -2,7 +2,14 @@ import torch
 import numpy as np
 import math
 import copy
-from motion_utils.load_skeleton import Skel
+import os
+import sys
+BASEPATH = os.path.dirname(__file__)
+from os.path import join as pjoin
+sys.path.insert(0, BASEPATH)
+sys.path.insert(0, pjoin(BASEPATH, '..'))
+
+from utils.load_skeleton import Skel
 
 
 class ForwardKinematics:

@@ -13,7 +13,7 @@ from data_loader import get_dataloader
 
 from latent_plot_utils import get_all_plots, get_demo_plots
 from trainer import Trainer
-from utils import to_float, ensure_dirs
+from py_utils import to_float, ensure_dirs
 
 
 def get_all_codes(cfg, output_path):

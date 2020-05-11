@@ -1,17 +1,20 @@
 import os
+import sys
 import random
 import torch
 import numpy as np
 import argparse
 BASEPATH = os.path.dirname(__file__)
 from os.path import join as pjoin
+sys.path.insert(0, BASEPATH)
+sys.path.insert(0, pjoin(BASEPATH, '..'))
 
 from torch.utils.data import Dataset, DataLoader
-from motion_utils.animation_data import AnimationData
-from motion_utils.animation_2d_data import AnimationData2D
-from load_skeleton import Skel
+from utils.animation_data import AnimationData
+from utils.animation_2d_data import AnimationData2D
+from utils.load_skeleton import Skel
 from config import Config
-from utils import print_composite
+from py_utils import print_composite
 
 
 def normalize_motion(motion, mean_pose, std_pose):

@@ -9,9 +9,11 @@ from matplotlib import cm
 from matplotlib.legend_handler import HandlerLine2D, HandlerTuple
 import tikzplotlib
 from os.path import join as pjoin
-BASEPATH = os.path.dirname(__file__)
+BASEPATH = os.path.dirname(os.path.abspath(__file__))
+sys.path.insert(0, BASEPATH)
 sys.path.insert(0, pjoin(BASEPATH, '..'))
-from utils import ensure_dirs
+
+from py_utils import ensure_dirs
 
 
 def distinct_labels_and_indices(labels):
