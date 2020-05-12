@@ -1,11 +1,9 @@
-# Deep-motion-editing (under construction)
+# Deep-motion-editing
 This library provides fundamental and advanced functions to work with 3D character animation in deep learning with Pytorch. The code contains end-to-end modules, from reading and editing animation files to visualizing and rendering (using Blender) them.
 
-The two main deep editing operations provided here, were proposed in [Skeleton-Aware Networks for Deep Motion Retargeting]() and [Unpaired Motion Style Transfer from Video to Animation](), which are published in SIGGRAPH 2020.
+The two main deep editing operations provided here, were proposed in [Skeleton-Aware Networks for Deep Motion Retargeting](https://deepmotionediting.github.io/retargeting) and [Unpaired Motion Style Transfer from Video to Animation](https://deepmotionediting.github.io/style_transfer), which are published in SIGGRAPH 2020.
 
-This library is written and maintained by [Kfir Aberman](kfiraberman.github.io), [Peizhuo Li](https://peizhuoli.github.io/) and [Yijia Weng](https://halfsummer11.github.io/).
-
-The library is still under development.
+This library is written and maintained by [Kfir Aberman](https://kfiraberman.github.io), [Peizhuo Li](https://peizhuoli.github.io/) and [Yijia Weng](https://halfsummer11.github.io/). The library is still under development.
 
 
 ## Quick Start
@@ -183,10 +181,12 @@ Eevee (left) is a fast, real-time, render engine provides limited quality, while
 
 ## Acknowledgments
 
-The code in the utils directory is mostly taken from [Holden et al. [2016]](http://theorangeduck.com/page/deep-learning-framework-character-motion-synthesis-and-editing)
+The code in the utils directory is mostly taken from [Holden et al. [2016]](http://theorangeduck.com/page/deep-learning-framework-character-motion-synthesis-and-editing).
+
+In addition, part of the MoCap dataset is taken from [Adobe Mixamo](https://www.mixamo.com/) and from the work of [Xia et al.](http://faculty.cs.tamu.edu/jchai/projects/SIG15/style-final.pdf).
 
 ## Citation
-If you use this code for your research, please cite our paper:
+If you use this code for your research, please cite our papers:
 ```
 @article{aberman2020skeleton,
   author = {Aberman, Kfir and Li, Peizhuo and Sorkine-Hornung Olga and Lischinski, Dani and Cohen-Or, Daniel and Chen, Baoquan},
