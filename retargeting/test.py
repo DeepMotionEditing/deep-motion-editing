@@ -3,6 +3,7 @@ from get_error import full_batch
 import numpy as np
 from option_parser import try_mkdir
 
+
 def batch_copy(source_path, suffix, dest_path, dest_suffix=None):
     try_mkdir(dest_path)
     files = [f for f in os.listdir(source_path) if f.endswith('_{}.bvh'.format(suffix))]
@@ -26,6 +27,7 @@ if __name__ == '__main__':
     cross_error = []
     intra_error = []
     for i in range(4):
+        print('Batch [{}/4]'.format(i + 1))
         os.system('python eval.py --eval_seq={}'.format(i))
 
         print('Collecting test error...')
@@ -48,6 +50,8 @@ if __name__ == '__main__':
 
     cross_error_mean = cross_error.mean()
     intra_error_mean = intra_error.mean()
+
+    os.system('rm -r ./pretrained/results/bvh')
 
     print('Intra-retargeting error:', intra_error_mean)
     print('Cross-retargeting error:', cross_error_mean)

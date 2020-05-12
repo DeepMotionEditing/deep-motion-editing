@@ -1,15 +1,7 @@
 import sys
-import os
-from pathlib import Path
-from option_parser import get_std_bvh
-sys.path.append("./utils")
-sys.path.append("./")
-import BVH
+sys.path.append("../utils")
 import numpy as np
-import torch
-import copy
-from utils.Quaternions import Quaternions
-from datasets.bvh_parser import BVH_file
+from Quaternions import Quaternions
 from models.skeleton import build_joint_topology
 
 

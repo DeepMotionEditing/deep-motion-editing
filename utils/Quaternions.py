@@ -25,17 +25,12 @@ class Quaternions:
             if len(qs.shape) == 1: qs = np.array([qs])
             self.qs = qs
             return
-        '''
-        if isinstance(qs, torch.Tensor):
-            if len(qs.shape) == 1: qs = torch.tensor([qs])
+
+        if isinstance(qs, Quaternions):
             self.qs = qs
             return
-        '''
-        if isinstance(qs, Quaternions):
-            self.qs = qs.qs
-            return
-            
-        raise TypeError('Quaternions must be constructed from iterable, numpy array, torch tensor, or Quaternions, not %s' % type(qs))
+
+        raise TypeError('Quaternions must be constructed from iterable, numpy array, or Quaternions, not %s' % type(qs))
     
     def __str__(self): return "Quaternions("+ str(self.qs) + ")"
     def __repr__(self): return "Quaternions("+ repr(self.qs) + ")"
@@ -114,15 +109,8 @@ class Quaternions:
 
             return (self * (vs * -self)).imaginaries
 
-        """ Note: Only multiple between tensor and tensor is OK """
-        '''
-        if isinstance(other, torch.Tensor) and other.shape[-1] == 3:
-            vs = Quaternions(torch.cat([torch.zeros(other.shape[:-1] + (1,), device=other.device), other], dim=-1))
-            return (self * (vs * -self)).imaginaries
-        '''
-        
         """ If float do Quaternions * Scalars """
-        if isinstance(other, np.ndarray) or isinstance(other, float) or isinstance(other, torch.Tensor):
+        if isinstance(other, np.ndarray) or isinstance(other, float):
             return Quaternions.slerp(Quaternions.id_like(self), self, other)
         
         raise TypeError('Cannot multiply/add Quaternions with type %s' % str(type(other)))
@@ -139,7 +127,6 @@ class Quaternions:
         
         if isinstance(other, Quaternions): return self * (-other)
         if isinstance(other, np.ndarray): return self * (1.0 / other)
-        #if isinstance(other, torch.Tensor): return self * (1.0 / other)
         if isinstance(other, float): return self * (1.0 / other)
         raise TypeError('Cannot divide/subtract Quaternions with type %s' + str(type(other)))
         

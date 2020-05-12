@@ -1,12 +1,9 @@
 import sys
 import os
 from option_parser import get_std_bvh
-sys.path.append("./utils")
-sys.path.append('./utils0')
-sys.path.append("./")
-import BVH2 as BVH
+sys.path.append("../utils")
+import BVH as BVH
 import numpy as np
-from utils.Quaternions import Quaternions
 from datasets.bvh_parser import BVH_file
 import Animation
 

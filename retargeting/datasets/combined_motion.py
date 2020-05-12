@@ -1,15 +1,9 @@
 from torch.utils.data import Dataset
 import copy
 from datasets.motion_dataset import MotionData
-import random
 import os
-import sys
-sys.path.append("./utils")
-sys.path.append("./")
-from pathlib import Path
 import numpy as np
 import torch
-from Quaternions import Quaternions
 from datasets.bvh_parser import BVH_file
 from option_parser import get_std_bvh
 from datasets import get_test_set
@@ -262,8 +256,14 @@ class TestData(Dataset):
     def get_item(self, gid, pid, id):
         character = self.characters[gid][pid]
         path = './datasets/Mixamo/{}/'.format(character)
-        file = path + self.file_list[id]
-        if not os.path.exists(file): return None
+        if isinstance(id, int):
+            file = path + self.file_list[id]
+        elif isinstance(id, str):
+            file = id
+        else:
+            raise Exception('Wrong input file type')
+        if not os.path.exists(file):
+            raise Exception('Cannot find file')
         file = BVH_file(file)
         motion = file.to_tensor(quater=self.args.rotation == 'quaternion')
         motion = motion[:, ::2]

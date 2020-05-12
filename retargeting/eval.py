@@ -3,6 +3,7 @@ from models import create_model
 from datasets import create_dataset, get_character_names
 import option_parser
 import torch
+from tqdm import tqdm
 
 
 def main():
@@ -27,9 +28,7 @@ def main():
     model = create_model(args, character_names, dataset)
     model.load(epoch=20000)
 
-    for i, motions in enumerate(dataset):
-        print('[{}/4] Running on test {}'.format(args.eval_seq, i))
-
+    for i, motions in tqdm(enumerate(dataset), total=len(dataset)):
         model.set_input(motions)
         model.test()
 

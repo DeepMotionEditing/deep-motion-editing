@@ -1,12 +1,8 @@
 import sys
 import torch
-import os
-from pathlib import Path
-sys.path.append("./utils")
-sys.path.append("./")
-import BVH
+sys.path.append("../utils")
+import BVH_mod as BVH
 import numpy as np
-import copy
 from Quaternions import Quaternions
 from models.Kinematics import ForwardKinematics
 from models.skeleton import build_edge_topology
@@ -40,6 +36,7 @@ skeleton_class_name = ['Mixamo 1', 'Mixamo 2', 'Dogs', 'CMU', 'Monkey']
 corps_names = [corps_name_1, corps_name_2, corps_name_3, corps_name_cmu, corps_name_monkey, corps_name_boss,
                corps_name_boss, corps_name_three_arms, corps_name_three_arms_split, corps_name_Prisoner, corps_name_mixamo2_m]
 ee_names = [ee_name_1, ee_name_2, ee_name_3, ee_name_cmu, ee_name_monkey, ee_name_1, ee_name_1, ee_name_1, ee_name_three_arms_split, ee_name_Prisoner, ee_name_2]
+
 
 class BVH_file:
     def __init__(self, file_path=None, args=None, dataset=None, new_root=None):
