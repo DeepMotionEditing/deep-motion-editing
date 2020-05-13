@@ -68,7 +68,7 @@ def main():
         argv_ = para_file.readline().split()[1:]
         args = option_parser.get_parser().parse_args(argv_)
 
-    args.cuda_device = test_device
+    args.cuda_device = test_device if torch.cuda.is_available() else 'cpu'
     args.is_train = False
     args.rotation = 'quaternion'
     args.eval_seq = eval_seq
