@@ -184,14 +184,9 @@ Eevee (left) is a fast, real-time, render engine provides limited quality, while
 </p>
 
 ## Acknowledgments
-
-<<<<<<< Updated upstream
 The code in the utils directory is mostly taken from [Holden et al. [2016]](http://theorangeduck.com/page/deep-learning-framework-character-motion-synthesis-and-editing).
 
 In addition, part of the MoCap dataset is taken from [Adobe Mixamo](https://www.mixamo.com/) and from the work of [Xia et al.](http://faculty.cs.tamu.edu/jchai/projects/SIG15/style-final.pdf).
-=======
-The code in the Utils directory is mostly taken from [Holden et al. [2016]](http://theorangeduck.com/page/deep-learning-framework-character-motion-synthesis-and-editing).
->>>>>>> Stashed changes
 
 ## Citation
 If you use this code for your research, please cite our papers:
