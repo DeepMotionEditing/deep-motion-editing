@@ -3,6 +3,9 @@ This library provides fundamental and advanced functions to work with 3D charact
 
 The two main deep editing operations provided here, were proposed in [Skeleton-Aware Networks for Deep Motion Retargeting](https://deepmotionediting.github.io/retargeting) and [Unpaired Motion Style Transfer from Video to Animation](https://deepmotionediting.github.io/style_transfer), which are published in SIGGRAPH 2020.
 
+<img src="images/retargeting_teaser.gif" align="center"> <br>
+
+
 This library is written and maintained by [Kfir Aberman](https://kfiraberman.github.io), [Peizhuo Li](https://peizhuoli.github.io/) and [Yijia Weng](https://halfsummer11.github.io/). The library is still under development.
 
 
@@ -20,22 +23,20 @@ python test.py -model_path MODEL_PATH -input_A PATH_A -input_B PATH_B -edit_type
 
 Download and extract the test dataset from [Google Drive](https://docs.google.com/uc?export=download&id=1_849LvuT3WBEHktBT97P2oMBzeJz7-UP) or [Baidu Disk](https://pan.baidu.com/s/1z1cQiqLUgjfxlWoajIPr0g) (ye1q). Then place the `Mixamo` directory within `retargeting/datasets`.
 
-To generate examples with pretrained model, run
+To generate the demo examples with the pretrained model, run
 
 ```bash
 cd retargeting
-python get_examples.py
-cd ..
+sh demo.sh
 ```
 
-The examples will be saved in `retargeting/examples`.
+The results will be saved in `retargeting/examples`.
 
-To get quantitative result with pretrained model, run
+To reconstruct the quantitative result with the pretrained model, run
 
 ```bash
 cd retargeting
 python test.py
-cd ..
 ```
 
 The retargeted demo results, that consists both intra-structual retargeting and cross-structural retargeting, will be saved in `retargeting/pretrained/results`.
@@ -54,6 +55,9 @@ python test.py -model_path retargeting/models/pretrained_retargeting.pth -input_
 (demo result GIF: input_motion, input_skeleton, output) -->
 
 ### Motion Style Transfer
+
+<img src="images/style_transfer_teaser.gif" align="center"> <br>
+
 <!-- `TYPE = style_transfer`  
 `PATH_A` - content motion input  
 `PATH_B` - style motion input  
@@ -74,7 +78,7 @@ python test.py -model_path retargeting/models/pretrained_style_transfer.pth -inp
 (demo result GIF: input_content, input_style_video, output) -->
 To receive the demo examples, simply run
 ```bash
-sh style_transfer/test.sh
+sh style_transfer/demo.sh
 ```
 The results will be saved in `style_transfer/demo_results`,
 where each folder contains the raw output `raw.bvh` and the output after footskate clean-up `fixed.bvh`.
@@ -181,9 +185,13 @@ Eevee (left) is a fast, real-time, render engine provides limited quality, while
 
 ## Acknowledgments
 
+<<<<<<< Updated upstream
 The code in the utils directory is mostly taken from [Holden et al. [2016]](http://theorangeduck.com/page/deep-learning-framework-character-motion-synthesis-and-editing).
 
 In addition, part of the MoCap dataset is taken from [Adobe Mixamo](https://www.mixamo.com/) and from the work of [Xia et al.](http://faculty.cs.tamu.edu/jchai/projects/SIG15/style-final.pdf).
+=======
+The code in the Utils directory is mostly taken from [Holden et al. [2016]](http://theorangeduck.com/page/deep-learning-framework-character-motion-synthesis-and-editing).
+>>>>>>> Stashed changes
 
 ## Citation
 If you use this code for your research, please cite our papers:
