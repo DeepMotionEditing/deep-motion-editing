@@ -2,13 +2,6 @@ import torch
 import torch.nn as nn
 import numpy as np
 import math
-import copy
-import sys
-
-sys.path.append('./retargeting/utils')
-import BVH
-import Animation
-
 
 
 class ForwardKinematics:
