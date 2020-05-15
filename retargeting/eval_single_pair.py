@@ -59,7 +59,6 @@ def main():
     output_character_name = args.target_bvh.split('/')[-2]
     output_filename = args.output_filename
 
-
     test_device = args.cuda_device
     eval_seq = args.eval_seq
 
