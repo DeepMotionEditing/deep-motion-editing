@@ -108,3 +108,8 @@ venv.bak/
 .vscode/
 .idea/
 
+# result and datasets for retargeting
+retargeting/datasets/Mixamo/*
+retargeting/datasets/test_set.tar.bz2
+retargeting/pretrained/results/*
+retargeting/examples
