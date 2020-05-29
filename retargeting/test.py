@@ -2,6 +2,7 @@ import os
 from get_error import full_batch
 import numpy as np
 from option_parser import try_mkdir
+from eval import eval
 
 
 def batch_copy(source_path, suffix, dest_path, dest_suffix=None):
@@ -28,7 +29,7 @@ if __name__ == '__main__':
     intra_error = []
     for i in range(4):
         print('Batch [{}/4]'.format(i + 1))
-        os.system('python eval.py --eval_seq={}'.format(i))
+        eval(i, './pretrained/')
 
         print('Collecting test error...')
         if i == 0:
