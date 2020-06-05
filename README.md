@@ -1,17 +1,18 @@
 # Deep-motion-editing
 
-![Python](https://img.shields.io/badge/Python->=3.7-Blue?logo=python)  ![Pytorch](https://img.shields.io/badge/PyTorch->=1.5.0-Orange?logo=pytorch)
+![Python](https://img.shields.io/badge/Python->=3.7-Blue?logo=python)  ![Pytorch](https://img.shields.io/badge/PyTorch->=1.5.0-Red?logo=pytorch)
+![Blender](https://img.shields.io/badge/Blender-%3E=2.8-Orange?logo=blender)
 
 This library provides fundamental and advanced functions to work with 3D character animation in deep learning with Pytorch. The code contains end-to-end modules, from reading and editing animation files to visualizing and rendering (using Blender) them.
 
 The main deep editing operations provided here, motion retargeting and motion style transfer, are based on two works published in SIGGRAPH 2020:
 
-Skeleton-Aware Networks for Deep Motion Retargeting: [Project](https://deepmotionediting.github.io/retargeting) | [Paper](https://arxiv.org/abs/2005.05732) |
+**Skeleton-Aware Networks for Deep Motion Retargeting**: [Project](https://deepmotionediting.github.io/retargeting) | [Paper](https://arxiv.org/abs/2005.05732) |
 [Video](https://www.youtube.com/watch?v=ym8Tnmiz5N8)
 
 <img src="images/retargeting_teaser.gif" align="center"> <br>
 
-Unpaired Motion Style Transfer from Video to Animation: [Project](https://deepmotionediting.github.io/style_transfer) | [Paper](https://arxiv.org/abs/2005.05751) |
+**Unpaired Motion Style Transfer from Video to Animation**: [Project](https://deepmotionediting.github.io/style_transfer) | [Paper](https://arxiv.org/abs/2005.05751) |
 [Video](https://www.youtube.com/watch?v=m04zuBSdGrc)
 
 <img src="images/style_transfer_teaser.gif" align="center"> <br>
@@ -139,14 +140,13 @@ We provide a simple wrapper of blender's python API (2.80) for rendering 3D anim
 
 > The Blender releases distributed from blender.org include a complete Python installation across all platforms, which means that any extensions you have installed in your systems Python won’t appear in Blender.
 
-To use external python libraries, you need to change the default blender python interpreter by:
+To use external python libraries, you can install new packages directly to Blender's python distribution. Alternatively, you can change the default blender python interpreter by:
 
 1. Remove the built-in python directory: `[blender_path]/2.80/python`.
 
 2. Make a symbolic link or simply copy a python interpreter at [blender_path]/2.80/python. E.g. `ln -s ~/anaconda3/envs/env_name [blender_path]/2.80/python`
 
 This interpreter should be python 3.7.x version and contains at least: numpy, scipy.
-
 
 ### Usage
 
