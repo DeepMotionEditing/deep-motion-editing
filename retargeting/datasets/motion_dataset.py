@@ -9,9 +9,10 @@ from option_parser import get_std_bvh
 
 
 class MotionData(Dataset):
-    '''
+    """
+    Clip long dataset into fixed length window for batched training
     each data is a 2d tensor with shape (Joint_num*3) * Time
-    '''
+    """
     def __init__(self, args):
         super(MotionData, self).__init__()
         name = args.dataset
@@ -32,8 +33,6 @@ class MotionData(Dataset):
         self.data.append(new_windows)
         self.data = torch.cat(self.data)
         self.data = self.data.permute(0, 2, 1)
-
-        train_len = self.data.shape[0] * 95 // 100
 
         if args.normalization == 1:
             self.mean = torch.mean(self.data, (0, 2), keepdim=True)
@@ -75,7 +74,6 @@ class MotionData(Dataset):
 
     def get_windows(self, motions):
         new_windows = []
-        #bvh_file = BVH_file('./datasets/Mixamo/{}.bvh'.format(self.character_name))
 
         for motion in motions:
             self.total_frame += motion.shape[0]

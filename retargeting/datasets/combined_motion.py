@@ -8,10 +8,11 @@ from datasets.bvh_parser import BVH_file
 from option_parser import get_std_bvh
 from datasets import get_test_set
 
-'''
-Mixed data for many skeletons but one topologies
-'''
+
 class MixedData0(Dataset):
+    """
+    Mixed data for many skeletons but one topologies
+    """
     def __init__(self, args, motions, skeleton_idx):
         super(MixedData0, self).__init__()
 
@@ -30,10 +31,11 @@ class MixedData0(Dataset):
         else:
             return [self.motions_reverse[item], self.skeleton_idx[item]]
 
-"""
-data_gruop_num * 2 * samples
-"""
+
 class MixedData(Dataset):
+    """
+    data_gruop_num * 2 * samples
+    """
     def __init__(self, args, datasets_groups):
         device = torch.device(args.cuda_device if (torch.cuda.is_available()) else 'cpu')
         self.final_data = []
@@ -60,8 +62,15 @@ class MixedData(Dataset):
 
                 tmp.append(MotionData(new_args))
 
-                means_group.append(tmp[-1].mean)
-                vars_group.append(tmp[-1].var)
+                mean = np.load('./datasets/Mixamo/mean_var/{}_mean.npy'.format(dataset))
+                var = np.load('./datasets/Mixamo/mean_var/{}_var.npy'.format(dataset))
+                mean = torch.tensor(mean)
+                mean = mean.reshape((1,) + mean.shape)
+                var = torch.tensor(var)
+                var = var.reshape((1,) + var.shape)
+
+                means_group.append(mean)
+                vars_group.append(var)
 
                 file = BVH_file(get_std_bvh(dataset=dataset))
                 if i == 0:
@@ -82,21 +91,21 @@ class MixedData(Dataset):
             self.means.append(means_group)
             self.vars.append(vars_group)
 
-        length_per_skeleton = total_length // dataset_num
-
         for datasets in all_datas:
             pt = 0
             motions = []
             skeleton_idx = []
             for dataset in datasets:
-                motions.append(dataset[pt * length_per_skeleton: (pt + 1) * length_per_skeleton])
-                skeleton_idx += [pt] * length_per_skeleton
+                motions.append(dataset[:])
+                skeleton_idx += [pt] * len(dataset)
                 pt += 1
             motions = torch.cat(motions, dim=0)
             if self.length != 0 and self.length != len(skeleton_idx):
-                raise Exception('Not equal dataset size for different topologies')
-            self.length = len(skeleton_idx)
+                self.length = min(self.length, len(skeleton_idx))
+            else:
+                self.length = len(skeleton_idx)
             self.final_data.append(MixedData0(args, motions, skeleton_idx))
+            print(self.length)
 
     def denorm(self, gid, pid, data):
         means = self.means[gid][pid, ...]
@@ -110,74 +119,6 @@ class MixedData(Dataset):
         res = []
         for data in self.final_data:
             res.append(data[item])
-        return res
-
-
-class CombinedData(Dataset):
-    def __init__(self, args, datasets_groups, device=None):
-        if device is None:
-            device = torch.device(args.cuda_device if (torch.cuda.is_available()) else 'cpu')
-        self.final_data = []
-        self.length = 0
-        self.offsets = []
-        self.joint_topologies = []
-        self.ee_ids = []
-        self.means = []
-        self.vars = []
-        dataset_num = 0
-        total_length = 100000
-        all_datas = []
-        for datasets in datasets_groups:
-            offsets_group = []
-            means_group = []
-            vars_group = []
-            dataset_num += len(datasets)
-            tmp = []
-            for i, dataset in enumerate(datasets):
-                new_args = copy.copy(args)
-                new_args.data_augment = 0
-                new_args.dataset = dataset
-
-                tmp.append(MotionData(new_args))
-
-                means_group.append(tmp[-1].mean)
-                vars_group.append(tmp[-1].var)
-
-                file = BVH_file(get_std_bvh(dataset=dataset))
-                if i == 0:
-                    self.joint_topologies.append(file.topology)
-                    self.ee_ids.append(file.get_ee_id())
-                new_offset = file.offset
-                new_offset = torch.tensor(new_offset, dtype=torch.float)
-                new_offset = new_offset.reshape((1,) + new_offset.shape)
-                offsets_group.append(new_offset)
-
-                total_length = min(total_length, len(tmp[-1]))
-            all_datas.append(tmp[0]) # tmp[0] means only support one ske
-            offsets_group = torch.cat(offsets_group, dim=0)
-            offsets_group = offsets_group.to(device)
-            means_group = torch.cat(means_group, dim=0).to(device)
-            vars_group = torch.cat(vars_group, dim=0).to(device)
-            self.offsets.append(offsets_group)
-            self.means.append(means_group)
-            self.vars.append(vars_group)
-
-        self.all_data = all_datas
-        self.length = total_length
-
-    def denorm(self, gid, pid, data):
-        means = self.means[gid][pid, ...]
-        var = self.vars[gid][pid, ...]
-        return data * var + means
-
-    def __len__(self):
-        return self.length
-
-    def __getitem__(self, item):
-        res = []
-        for data in self.all_data:
-            res.append([data[item], 0])
-            # 0 is for skeleton offset index, here we only have one skeleton, so 0 is OK
         return res
 
 
