@@ -1,6 +1,6 @@
 import sys
 import os
-sys.path.append("./utils")
+sys.path.append("../utils")
 sys.path.append("./")
 import BVH
 import numpy as np
@@ -35,11 +35,11 @@ class BVH_file:
         self.frame_num = self.anim.rotations.shape[0]
 
         self.normalize()
-    
+
     @property
     def topology(self):
         return self.anim.parents
-    
+
     @property
     def offsets(self):
         return self.anim.offsets
@@ -62,11 +62,11 @@ class BVH_file:
             nonlocal high
             low = min(low, pos[-1])
             high = max(high, pos[-1])
-            
+
             for j in range(self.joint_num):
                 if self.topology[j] == i:
                     dfs(j, pos + self.offsets[j])
-        
+
         dfs(0, np.array([0, 0, 0]))
 
         return high - low
@@ -89,7 +89,7 @@ def add_bone(offset, parent_obj, name):
     new_bone.rotation_quaternion = rot
 
     set_parent(parent_obj, new_bone)
-    
+
     return new_bone
 
 def add_joint(location, parent_obj, name):
@@ -120,7 +120,7 @@ def build_t_pose(file: BVH_file, joint, parent_obj, all_obj):
 
 def set_parent(parent, child):
     child.parent = parent
-    child.matrix_parent_inverse = parent.matrix_world.inverted() 
+    child.matrix_parent_inverse = parent.matrix_world.inverted()
     '''
         See https://blender.stackexchange.com/questions/9200/how-to-make-object-a-a-parent-of-object-b-via-blenders-python-api
     '''
@@ -131,7 +131,7 @@ def set_animation(file, joints):
     bpy.context.scene.frame_end = file.anim.rotations.shape[0] - 1
 
     bpy.context.scene.render.fps = 1 / file.frametime
-    
+
     bpy.ops.object.select_all(action='DESELECT')
 
     print('Set fps to', bpy.context.scene.render.fps)
@@ -140,7 +140,7 @@ def set_animation(file, joints):
     for frame in range(0, file.frame_num):
         joints[0].location = file.anim.positions[frame, 0, :]
         joints[0].keyframe_insert(data_path='location', frame=frame)
-        if frame % 100 == 99: 
+        if frame % 100 == 99:
             print('[{}/{}] done.'.format(frame+1, file.frame_num))
         for j in range(file.joint_num):
             joints[j].rotation_mode = 'QUATERNION'
@@ -167,7 +167,7 @@ def load_bvh(file_name):
     for j in range(file.joint_num):
         name = file.names[j]
         for obj in all_obj:
-            if obj.name == name + '_end': 
+            if obj.name == name + '_end':
                 all_joints.append(obj)
                 break
     set_animation(file, all_joints)
