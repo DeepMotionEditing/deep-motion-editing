@@ -105,7 +105,6 @@ class MixedData(Dataset):
             else:
                 self.length = len(skeleton_idx)
             self.final_data.append(MixedData0(args, motions, skeleton_idx))
-            print(self.length)
 
     def denorm(self, gid, pid, data):
         means = self.means[gid][pid, ...]
