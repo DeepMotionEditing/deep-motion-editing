@@ -371,6 +371,13 @@ def find_neighbor(edges, d):
 
     # add neighbor for global part
     global_part_neighbor = neighbor_list[0].copy()
+    """
+    Line #373 is buggy. Thanks @crissallan!!
+    See issue #30 (https://github.com/DeepMotionEditing/deep-motion-editing/issues/30)
+    However, fixing this bug will make it unable to load the pretrained model and 
+    affect the reproducibility of quantitative error reported in the paper.
+    It is not a fatal bug so we didn't touch it and we are looking for possible solutions.
+    """
     for i in global_part_neighbor:
         neighbor_list[i].append(edge_num)
     neighbor_list.append(global_part_neighbor)
