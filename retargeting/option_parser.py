@@ -40,7 +40,7 @@ def get_parser():
     parser.add_argument('--epoch_begin', type=int, default=0)
     parser.add_argument('--lambda_rec', type=float, default=5)
     parser.add_argument('--lambda_cycle', type=float, default=5)
-    parser.add_argument('--lambda_ee', type=float, default=10)
+    parser.add_argument('--lambda_ee', type=float, default=100)
     parser.add_argument('--lambda_global_pose', type=float, default=2.5)
     parser.add_argument('--lambda_position', type=float, default=1)
     parser.add_argument('--ee_velo', type=int, default=1)
