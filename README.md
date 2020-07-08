@@ -226,18 +226,18 @@ Eevee (left) is a fast, real-time, render engine provides limited quality, while
 
 ## Skinning
 
-### Automatically Skinning
+### Automatic Skinning
 
-We provide a blender script for applying "skinning" to the output skeletons. You'll need to download fbx file corresponding to the targeted character (for example, "[mousey](https://www.mixamo.com/#/?page=1&query=mousey&type=Character)"). You can get a skinned animation by simply running
+We provide a blender script that applies "skinning" to the output skeletons. You first need to download the fbx file which corresponds to the targeted character (for example, "[mousey](https://www.mixamo.com/#/?page=1&query=mousey&type=Character)"). Then, you can get a skinned animation by simply run
 
 ```sh
 blender -P blender_rendering/skinning.py -- --bvh_file [bvh file path] --fbx_file [fbx file path]
 ```
 
-This is an experimental script and does not always get perfect result. It might not work for all fbx and bvh files. If it fails, you could try to tweak the script or follow the manually skinning guideline below.
+Note that the script might not work well for all the fbx and bvh files. If it fails, you can try to tweak the script or follow the manual skinning guideline below.
 
 
-### Manually Skinning
+### Manual Skinning
 
 Here we provide a "quick and dirty" guideline for how to apply skin to the resulting bvh files, with blender:
 
