@@ -105,7 +105,7 @@ def adapt_weight(source_weight, source_label, source_arm, dest_arm):
 
     prefix = ''
     ref_name = source_arm.data.bones[0].name
-    if ':' in ref_name:
+    if ':' in ref_name and ':' not in dest_arm.data.bones[0].name:
         idx = ref_name.index(':')
         prefix = ref_name[:idx + 1]
     dest_name = [prefix + bone.name for bone in dest_arm.data.bones]
