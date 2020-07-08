@@ -8,16 +8,16 @@ from datasets.bvh_parser import BVH_file
 import Animation
 
 
-def full_batch(suffix):
+def full_batch(suffix, prefix):
     res = []
     chars = ['Mousey_m', 'Goblin_m', 'Mremireh_m', 'Vampire_m']
     for char in chars:
-        res.append(batch(char, suffix))
+        res.append(batch(char, suffix, prefix))
     return res
 
 
-def batch(char, suffix):
-    input_path = './pretrained/results/bvh'
+def batch(char, suffix, prefix):
+    input_path = os.path.join(prefix, 'results/bvh')
 
     all_err = []
     ref_file = get_std_bvh(dataset=char)
