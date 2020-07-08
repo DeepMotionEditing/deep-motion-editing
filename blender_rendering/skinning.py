@@ -44,6 +44,9 @@ def set_rest_pose_bvh(filename, source_arm):
 
 
 def extract_weight(me):
+    """
+    Extract skinning weight from a given mesh
+    """
     verts = me.data.vertices
     vgrps = me.vertex_groups
 
@@ -101,8 +104,13 @@ def set_modifier(me, arm):
 
 
 def adapt_weight(source_weight, source_label, source_arm, dest_arm):
+    """
+    The targeted armature could be a reduced one, e.g. no fingers. So move the skinning weight of each reduced armature to its nearest ancestor.
+    """
     weight = np.zeros((source_weight.shape[0], len(dest_arm.data.bones)))
 
+    # Skinning weight is bond to armature names. For simplicity, a common prefix 
+    # is removed in our retargeting output. Here we solve this problem.
     prefix = ''
     ref_name = source_arm.data.bones[0].name
     if ':' in ref_name and ':' not in dest_arm.data.bones[0].name:
