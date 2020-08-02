@@ -136,7 +136,7 @@ class BVH_file:
 
         for name in corps_names[self.skeleton_type]:
             for j in range(self.anim.shape[1]):
-                if name in self._names[j]:
+                if name == self._names[j]:
                     self.corps.append(j)
                     break
 
