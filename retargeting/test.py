@@ -59,7 +59,7 @@ if __name__ == '__main__':
     cross_error_mean = cross_error.mean()
     intra_error_mean = intra_error.mean()
 
-    os.system('rm -r %' % pjoin(prefix, results/bvh))
+    os.system('rm -r %s' % pjoin(prefix, 'results/bvh'))
 
     print('Intra-retargeting error:', intra_error_mean)
     print('Cross-retargeting error:', cross_error_mean)
