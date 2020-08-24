@@ -129,7 +129,7 @@ python train.py --save_dir=./training/
 It will use default hyper-parameters to train the model and save trained model in `retargeting/training` directory. More options are available in `retargeting/option_parser.py`. You can use tensorboard to monitor the training progress by running
 
 ```bash
-tensorbard --logdir=./retargeting/training/logs/
+tensorboard --logdir=./retargeting/training/logs/
 ```
 
 ### Motion Style Transfer
