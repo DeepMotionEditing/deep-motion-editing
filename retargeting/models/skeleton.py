@@ -95,6 +95,11 @@ class SkeletonConv(nn.Module):
         res = F.conv1d(F.pad(input, self._padding_repeated_twice, mode=self.padding_mode),
                        weight_masked, self.bias, self.stride,
                        0, self.dilation, self.groups)
+
+        if self.add_offset:
+            offset_res = self.offset_enc(self.offset)
+            offset_res = offset_res.reshape(offset_res.shape + (1, ))
+            res += offset_res / 100
         return res
 
 
