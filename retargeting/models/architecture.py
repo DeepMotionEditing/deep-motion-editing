@@ -64,7 +64,7 @@ class GAN_model(BaseModel):
             for i in range(self.n_topology):
                 self.motion_backup.append(motions[i][0].clone())
                 self.motions_input[i][0][1:] = self.motions_input[i][0][0]
-                self.motions_input[i][1] = [0] * 4
+                self.motions_input[i][1] = [0] * len(self.motions_input[i][1])
 
     def discriminator_requires_grad_(self, requires_grad):
         for model in self.models:
@@ -299,10 +299,9 @@ class GAN_model(BaseModel):
         for src in range(self.n_topology):
             for dst in range(self.n_topology):
                 for i in range(len(self.character_names[dst])):
-                    if dst != 0:
-                        dst_path = os.path.join(self.bvh_path, self.character_names[dst][i])
-                        self.writer[dst][i].write_raw(self.fake_res_denorm[p][i, ...], 'quaternion',
-                                                   os.path.join(dst_path, '{}_{}.bvh'.format(self.id_test, src)))
+                    dst_path = os.path.join(self.bvh_path, self.character_names[dst][i])
+                    self.writer[dst][i].write_raw(self.fake_res_denorm[p][i, ...], 'quaternion',
+                                                  os.path.join(dst_path, '{}_{}.bvh'.format(self.id_test, src)))
                 p += 1
 
         self.id_test += 1

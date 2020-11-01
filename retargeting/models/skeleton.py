@@ -95,6 +95,11 @@ class SkeletonConv(nn.Module):
         res = F.conv1d(F.pad(input, self._padding_repeated_twice, mode=self.padding_mode),
                        weight_masked, self.bias, self.stride,
                        0, self.dilation, self.groups)
+
+        if self.add_offset:
+            offset_res = self.offset_enc(self.offset)
+            offset_res = offset_res.reshape(offset_res.shape + (1, ))
+            res += offset_res / 100
         return res
 
 
@@ -371,6 +376,13 @@ def find_neighbor(edges, d):
 
     # add neighbor for global part
     global_part_neighbor = neighbor_list[0].copy()
+    """
+    Line #373 is buggy. Thanks @crissallan!!
+    See issue #30 (https://github.com/DeepMotionEditing/deep-motion-editing/issues/30)
+    However, fixing this bug will make it unable to load the pretrained model and 
+    affect the reproducibility of quantitative error reported in the paper.
+    It is not a fatal bug so we didn't touch it and we are looking for possible solutions.
+    """
     for i in global_part_neighbor:
         neighbor_list[i].append(edge_num)
     neighbor_list.append(global_part_neighbor)

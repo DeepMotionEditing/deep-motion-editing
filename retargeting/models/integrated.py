@@ -1,5 +1,4 @@
 import torch
-import torch.nn as nn
 from models.enc_and_dec import AE, StaticEncoder
 from models.vanilla_gan import Discriminator
 from models.skeleton import build_edge_topology
