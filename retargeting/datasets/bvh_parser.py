@@ -7,6 +7,7 @@ from Quaternions import Quaternions
 from models.Kinematics import ForwardKinematics
 from models.skeleton import build_edge_topology
 from option_parser import get_std_bvh
+from datasets.bvh_writer import write_bvh
 
 """
 1.
@@ -249,7 +250,10 @@ class BVH_file:
         return res
 
     def write(self, file_path):
-        BVH.save(file_path, self.anim, self.names, self.frametime, order='xyz')
+        motion = self.to_numpy(quater=False, edge=False)
+        rotations = motion[..., :-3].reshape(motion.shape[0], -1, 3)
+        positions = motion[..., -3:]
+        write_bvh(self.topology, self.offset, rotations, positions, self.names, 1.0/30, 'xyz', file_path)
 
     def from_numpy(self, motions, frametime=None, quater=False):
         if frametime is not None:
@@ -265,7 +269,7 @@ class BVH_file:
             rotations = Quaternions(rotations)
             rotations = np.degrees(rotations.euler())
         else:
-            rotations = motions[:, -3:].reshape(motions.shape[0], -1, 3)
+            rotations = motions[:, :-3].reshape(motions.shape[0], -1, 3)
         rotations_full = np.zeros((rotations.shape[0], self.anim.shape[1], 3))
 
         for i in range(self.anim.shape[1]):
