@@ -7,6 +7,7 @@ from Quaternions import Quaternions
 from models.Kinematics import ForwardKinematics
 from models.skeleton import build_edge_topology
 from option_parser import get_std_bvh
+from datasets.bvh_writer import write_bvh
 
 """
 1.
@@ -249,30 +250,10 @@ class BVH_file:
         return res
 
     def write(self, file_path):
-        BVH.save(file_path, self.anim, self.names, self.frametime, order='xyz')
-
-    def from_numpy(self, motions, frametime=None, quater=False):
-        if frametime is not None:
-            self.frametime = frametime
-        motions = motions.copy()
-        positions = motions[:, -3:]
-        self.anim.positions = positions[:, np.newaxis, :]
-        if quater:
-            rotations = motions[:, :-3].reshape(motions.shape[0], -1, 4)
-            norm = rotations[:, :, 0]**2 + rotations[:, :, 1]**2 + rotations[:, :, 2]**2 + rotations[:, :, 3]**2
-            norm = np.repeat(norm[:, :, np.newaxis], 4, axis=2)
-            rotations /= norm
-            rotations = Quaternions(rotations)
-            rotations = np.degrees(rotations.euler())
-        else:
-            rotations = motions[:, -3:].reshape(motions.shape[0], -1, 3)
-        rotations_full = np.zeros((rotations.shape[0], self.anim.shape[1], 3))
-
-        for i in range(self.anim.shape[1]):
-            if i in self.corps:
-                pt = self.corps.index(i)
-                rotations_full[:, i, :] = rotations[:, pt, :]
-        self.anim.rotations = rotations_full
+        motion = self.to_numpy(quater=False, edge=False)
+        rotations = motion[..., :-3].reshape(motion.shape[0], -1, 3)
+        positions = motion[..., -3:]
+        write_bvh(self.topology, self.offset, rotations, positions, self.names, 1.0/30, 'xyz', file_path)
 
     def get_ee_length(self):
         if len(self.ee_length): return self.ee_length
