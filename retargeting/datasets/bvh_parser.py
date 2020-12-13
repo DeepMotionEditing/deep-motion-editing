@@ -255,29 +255,6 @@ class BVH_file:
         positions = motion[..., -3:]
         write_bvh(self.topology, self.offset, rotations, positions, self.names, 1.0/30, 'xyz', file_path)
 
-    def from_numpy(self, motions, frametime=None, quater=False):
-        if frametime is not None:
-            self.frametime = frametime
-        motions = motions.copy()
-        positions = motions[:, -3:]
-        self.anim.positions = positions[:, np.newaxis, :]
-        if quater:
-            rotations = motions[:, :-3].reshape(motions.shape[0], -1, 4)
-            norm = rotations[:, :, 0]**2 + rotations[:, :, 1]**2 + rotations[:, :, 2]**2 + rotations[:, :, 3]**2
-            norm = np.repeat(norm[:, :, np.newaxis], 4, axis=2)
-            rotations /= norm
-            rotations = Quaternions(rotations)
-            rotations = np.degrees(rotations.euler())
-        else:
-            rotations = motions[:, :-3].reshape(motions.shape[0], -1, 3)
-        rotations_full = np.zeros((rotations.shape[0], self.anim.shape[1], 3))
-
-        for i in range(self.anim.shape[1]):
-            if i in self.corps:
-                pt = self.corps.index(i)
-                rotations_full[:, i, :] = rotations[:, pt, :]
-        self.anim.rotations = rotations_full
-
     def get_ee_length(self):
         if len(self.ee_length): return self.ee_length
         degree = [0] * len(self.topology)
