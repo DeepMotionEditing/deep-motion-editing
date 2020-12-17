@@ -125,10 +125,7 @@ class BVH_file:
         if self.skeleton_type == 0:
             self.set_new_root(1)
 
-        self.details = []
-        for i, name in enumerate(self._names):
-            if ':' in name: name = name[name.find(':')+1:]
-            if name not in corps_names[self.skeleton_type]: self.details.append(i)
+        self.details = [i for i, name in enumerate(self._names) if name not in corps_names[self.skeleton_type]]
         self.joint_num = self.anim.shape[1]
         self.corps = []
         self.simplified_name = []
