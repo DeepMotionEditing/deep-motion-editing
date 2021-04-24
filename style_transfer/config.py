@@ -10,10 +10,10 @@ sys.path.insert(0, BASEPATH)
 
 class Config:
 
-    for_try = True
+    for_try = False  # set to True only if you want to quickly check if all parts (latent space visualization, result output, etc.) function correctly 
 
     # Save & Visualization
-    name = 'pretrained'
+    name = 'pretrained'     # name of the experiment, for training from scratch please use a different name
 
     cuda_id = 0
 
@@ -25,7 +25,7 @@ class Config:
     # data paths
     data_dir = pjoin(BASEPATH, 'data')
     expr_dir = BASEPATH
-    data_filename = "xia.npz"
+    data_filename = "xia.npz"   # change to 'bfa.npz' for training on bfa data
     data_path = pjoin(data_dir, data_filename)
     extra_data_dir = pjoin(data_dir, data_filename.split('.')[-2].split('/')[-1] + "_norms")
 
@@ -153,7 +153,7 @@ class Config:
     disc_pool_size = 3
     disc_pool_stride = 2
 
-    num_classes = 8
+    num_classes = 8         # set to 16 for training on bfa data
 
     gan_w = 1
     rec_w = 1
