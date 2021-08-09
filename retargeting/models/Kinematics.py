@@ -71,7 +71,7 @@ class ForwardKinematics:
                 assert i == 0
                 continue
 
-            transform[..., i, :, :] = torch.matmul(transform[..., pi, :, :], transform[..., i, :, :])
+            transform[..., i, :, :] = torch.matmul(transform[..., pi, :, :].clone(), transform[..., i, :, :].clone())
             result[..., i, :] = torch.matmul(transform[..., i, :, :], offset[..., i, :, :]).squeeze()
             if world: result[..., i, :] += result[..., pi, :]
         return result
