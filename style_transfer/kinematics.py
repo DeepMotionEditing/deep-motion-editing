@@ -81,7 +81,7 @@ class ForwardKinematics:
 
             result[..., i, :] = torch.matmul(transform[..., pi, :, :], self.offset[i])
             if world: result[..., i, :] += result[..., pi, :]
-            transform[..., i, :, :] = torch.matmul(transform[..., pi, :, :], transform[..., i, :, :])
+            transform[..., i, :, :] = torch.matmul(transform[..., pi, :, :].clone(), transform[..., i, :, :].clone())
         return result
 
     @staticmethod
