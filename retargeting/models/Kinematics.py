@@ -215,7 +215,7 @@ class InverseKinematics:
                 continue
 
             result[..., i, :] = torch.matmul(transform[..., pi, :, :], offset[..., i, :, :]).squeeze()
-            transform[..., i, :, :] = torch.matmul(transform[..., pi, :, :], transform[..., i, :, :])
+            transform[..., i, :, :] = torch.matmul(transform[..., pi, :, :].clone(), transform[..., i, :, :].clone())
             if world: result[..., i, :] += result[..., pi, :]
         return result
 
