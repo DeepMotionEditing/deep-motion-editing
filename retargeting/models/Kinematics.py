@@ -72,7 +72,7 @@ class ForwardKinematics:
                 continue
 
             transform[..., i, :, :] = torch.matmul(transform[..., pi, :, :].clone(), transform[..., i, :, :].clone())
-            result[..., i, :] = torch.matmul(transform[..., i, :, :], offset[..., i, :, :]).squeeze()
+            result[..., i, :] = torch.matmul(transform[..., pi, :, :], offset[..., i, :, :]).squeeze()
             if world: result[..., i, :] += result[..., pi, :]
         return result
 
