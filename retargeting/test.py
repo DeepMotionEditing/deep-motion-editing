@@ -1,4 +1,5 @@
 import os
+import platform
 from os.path import join as pjoin
 from get_error import full_batch
 import numpy as np
@@ -6,6 +7,9 @@ from option_parser import try_mkdir
 from eval import eval
 import argparse
 
+separator = '/'
+if platform.system() == 'Windows':
+    separator = '\\'
 
 def batch_copy(source_path, suffix, dest_path, dest_suffix=None):
     try_mkdir(dest_path)
@@ -24,13 +28,13 @@ if __name__ == '__main__':
     test_characters = ['Mousey_m', 'Goblin_m', 'Mremireh_m', 'Vampire_m']
 
     parser = argparse.ArgumentParser()
-    parser.add_argument('--save_dir', type=str, default='./pretrained/')
+    parser.add_argument('--save_dir', type=str, default='.'+separator+'pretrained'+separator)
     args = parser.parse_args()
     prefix = args.save_dir
 
-    cross_dest_path = pjoin(prefix, 'results/cross_structure/')
-    intra_dest_path = pjoin(prefix, 'results/intra_structure/')
-    source_path = pjoin(prefix, 'results/bvh/')
+    cross_dest_path = pjoin(prefix, 'results'+separator+'cross_structure'+separator+'')
+    intra_dest_path = pjoin(prefix, 'results'+separator+'intra_structure'+separator+'')
+    source_path = pjoin(prefix, 'results'+separator+'bvh'+separator+'')
 
     cross_error = []
     intra_error = []
@@ -59,7 +63,7 @@ if __name__ == '__main__':
     cross_error_mean = cross_error.mean()
     intra_error_mean = intra_error.mean()
 
-    os.system('rm -r %s' % pjoin(prefix, 'results/bvh'))
+    os.system('rm -r %s' % pjoin(prefix, 'results'+separator+'bvh'))
 
     print('Intra-retargeting error:', intra_error_mean)
     print('Cross-retargeting error:', cross_error_mean)
