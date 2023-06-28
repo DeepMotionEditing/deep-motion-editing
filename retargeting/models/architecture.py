@@ -6,7 +6,11 @@ from models.base_model import BaseModel
 from option_parser import try_mkdir
 
 import os
+import platform
 
+separator = '/'
+if platform.system() == 'Windows':
+    separator = '\\'
 
 class GAN_model(BaseModel):
     def __init__(self, args, character_names, dataset):
@@ -42,7 +46,7 @@ class GAN_model(BaseModel):
             for i in range(self.n_topology):
                 self.err_crit.append(Eval_Criterion(dataset.joint_topologies[i]))
             self.id_test = 0
-            self.bvh_path = os.path.join(args.save_dir, 'results/bvh')
+            self.bvh_path = os.path.join(args.save_dir, 'results'+separator+'bvh')
             option_parser.try_mkdir(self.bvh_path)
 
             self.writer = []

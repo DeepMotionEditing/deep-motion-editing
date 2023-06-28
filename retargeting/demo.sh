@@ -1,1 +1,1 @@
-python demo.py 
+python demo-win.py 

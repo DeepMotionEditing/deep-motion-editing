@@ -1,9 +1,15 @@
 import argparse
 
+import os
+import platform
+
+separator = '/'
+if platform.system() == 'Windows':
+    separator = '\\'
 
 def get_parser():
     parser = argparse.ArgumentParser()
-    parser.add_argument('--save_dir', type=str, default='./pretrained', help='directory for all savings')
+    parser.add_argument('--save_dir', type=str, default=os.getcwd()+separator+'pretrained', help='directory for all savings')
     parser.add_argument('--cuda_device', type=str, default='cuda:0', help='cuda device number, eg:[cuda:0]')
     parser.add_argument('--num_layers', type=int, default=2, help='number of layers')
     parser.add_argument('--learning_rate', type=float, default=2e-4, help='learning rate')
