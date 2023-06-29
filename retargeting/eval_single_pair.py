@@ -1,16 +1,20 @@
 import os
+import platform
 import torch
 from models import create_model
 from datasets import create_dataset
 import option_parser
 
+separator = '/'
+if platform.system() == 'Windows':
+    separator = '\\'
 
 def eval_prepare(args):
     character = []
     file_id = []
     character_names = []
-    character_names.append(args.input_bvh.split('/')[-2])
-    character_names.append(args.target_bvh.split('/')[-2])
+    character_names.append(args.input_bvh.split(separator)[-2])
+    character_names.append(args.target_bvh.split(separator)[-2])
     if args.test_type == 'intra':
         if character_names[0].endswith('_m'):
             character = [['BigVegas', 'BigVegas'], character_names]
@@ -35,9 +39,9 @@ def eval_prepare(args):
 
 
 def recover_space(file):
-    l = file.split('/')
+    l = file.split(separator)
     l[-1] = l[-1].replace('_', ' ')
-    return '/'.join(l)
+    return separator.join(l)
 
 
 def main():
@@ -54,9 +58,16 @@ def main():
     args.target_bvh = recover_space(args.target_bvh)
     args.output_filename = recover_space(args.output_filename)
 
+    # print(input_bvh)
+    # print(input_bvh)
+    # print(input_bvh)
+    # print(target_bvh)
+    # print(target_bvh)
+    # print(target_bvh)
+
     character_names, file_id, src_id = eval_prepare(args)
-    input_character_name = args.input_bvh.split('/')[-2]
-    output_character_name = args.target_bvh.split('/')[-2]
+    input_character_name = args.input_bvh.split(separator)[-2]
+    output_character_name = args.target_bvh.split(separator)[-2]
     output_filename = args.output_filename
 
     test_device = args.cuda_device
@@ -91,7 +102,10 @@ def main():
     model.set_input(input_motion)
     model.test()
 
-    os.system('cp "{}/{}/0_{}.bvh" "./{}"'.format(model.bvh_path, output_character_name, src_id, output_filename))
+    if platform.system() == 'Windows':
+        os.system('cp "{}\\{}\\0_{}.bvh" "{}"'.format(model.bvh_path, output_character_name, src_id, output_filename))
+    else:
+        os.system('cp "{}/{}/0_{}.bvh" "./{}"'.format(model.bvh_path, output_character_name, src_id, output_filename))
 
 
 if __name__ == '__main__':
