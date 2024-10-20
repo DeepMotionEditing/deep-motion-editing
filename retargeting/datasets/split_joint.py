@@ -7,6 +7,7 @@ as suffix to store the split files in the new dir.
 
 import sys
 import os
+sys.path.append(os.getcwd())
 from option_parser import try_mkdir
 import numpy as np
 from tqdm import tqdm

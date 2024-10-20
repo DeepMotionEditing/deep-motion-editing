@@ -318,4 +318,4 @@ class BVH_file:
         names = self._names.copy()
         for i, j in enumerate(new_seq):
             self._names[i] = names[j]
-        self.anim.parents = np.array(new_parent, dtype=np.int)
+        self.anim.parents = np.array(new_parent, dtype=int)
